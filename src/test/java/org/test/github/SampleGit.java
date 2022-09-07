@@ -23,6 +23,14 @@ public class SampleGit extends BaseClass{
 		impWait(10);
 		
 		FlipkartSearch f=new FlipkartSearch();
+
+		
+		
+		
+		
+		
+		
+		
 		
 		sendKeys(f.search, "iphone 13 pro max");
 		
@@ -39,26 +47,21 @@ public class SampleGit extends BaseClass{
 			String products = we.getText();
 			li.add(products);
 		}
-		List<String> lis=new ArrayList<>();
+		List<Integer> lis=new ArrayList<>();
 		List<WebElement> allprice = driver.findElements(By.xpath("//div[@class='_30jeq3 _1_WHN1']"));
 		for (int i = 0; i < allprice.size(); i++) {
 			WebElement we2 = allprice.get(i);
-			String price = we2.getText().replace("₹", "Rs.");
+			String p = we2.getText().replace("₹", "").replace(",", "");
+			int price = Integer.parseInt(p);
 			lis.add(price);
+			
 		}
 		System.out.println("-------PRODUCT LIST-------");
 		System.out.println(li);
 		
 		System.out.println("---------PRICE LIST-------");
 		System.out.println(lis);
-		
-		Map m= new HashMap<>();
-		m.put(li, lis);
-		Set<Entry<String, String>> es=m.entrySet();
-		for (Entry<String, String> entry : es) {
-			System.out.println(entry);
-			
-		}
+
 		System.out.println("---------ASCENDING ORDER-------");
 		Collections.sort(lis);
 		System.out.println(lis);
@@ -73,15 +76,24 @@ public class SampleGit extends BaseClass{
 		System.out.println("---------MINIMUM PRICE-------");
 		System.out.println(Collections.min(lis));
 
+		System.out.println("---------PRODUCTS AND PRICE-------");
+
+		Map<String, Integer> m= new HashMap<String, Integer>();
+		for (int i = 0; i < li.size(); i++) {
+			m.put(li.get(i), lis.get(i));
+			System.out.println(li.get(i)+ "=" +lis.get(i));
+		}
+			System.out.println(m);
 		
-		
+			
+		}
 
 		}
 		
 		
 		
 		
-	}
+	
  
 	
 	
